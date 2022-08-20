@@ -20,6 +20,10 @@ public class Department implements Serializable {
 		this.id = id;
 		this.name = name;
 	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 
 	public Integer getId() {
@@ -30,6 +34,10 @@ public class Department implements Serializable {
 
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
 
