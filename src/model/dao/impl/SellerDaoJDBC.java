@@ -25,8 +25,31 @@ public class SellerDaoJDBC implements SellerDao {
 
 	@Override
 	public void insert(Seller obj) {
-		// TODO Auto-generated method stub
-
+		PreparedStatement ps = null;
+		
+		try {
+		ps = con.prepareStatement("INSERT INTO seller (Name, Email, BirthDate, BaseSalary, DepartmentId) "
+				+ " VALUES (?, ?, ?, ?, ?)");
+		
+		ps.setString(1, obj.getName());
+		ps.setString(2, obj.getEmail());
+		ps.setDate(3, new java.sql.Date(obj.getBirthDate().getTime()));
+		ps.setDouble(4, obj.getBaseSalary());
+		ps.setInt(5, obj.getDepartment().getId());
+		
+		ps.executeUpdate();
+		
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(ps);
+			
+		}
+	
+		
+		
 	}
 
 	@Override
@@ -165,6 +188,8 @@ public class SellerDaoJDBC implements SellerDao {
 			DB.closeResultSet(rs);
 			
 		}
+		
+		
 		
 		
 	}
